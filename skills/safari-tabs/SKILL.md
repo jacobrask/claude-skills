@@ -11,7 +11,7 @@ Comprehensive Safari browser management via AppleScript and system APIs.
 
 | Script | Purpose |
 |--------|---------|
-| `get_tabs_tsv.sh` | Get all tabs as TSV (window, tab, url, title) |
+| `get_tabs.sh` | Get all tabs with optional window filtering (TSV/markdown/JSON) |
 | `export_tabs_json.sh` | Export tabs to JSON with metadata |
 | `export_tabs_csv.sh` | Export tabs to CSV format |
 | `export_tabs_markdown.sh` | Export tabs to markdown (list/table/checklist/grouped) |
@@ -24,6 +24,23 @@ Comprehensive Safari browser management via AppleScript and system APIs.
 | `get_reading_list.sh` | Export Safari Reading List |
 | `get_bookmarks.sh` | Export Safari Bookmarks (tree/flat/json) |
 | `search_history.sh` | Search Safari browsing history |
+
+## Getting Tabs
+
+Use `get_tabs.sh` for flexible tab retrieval with optional filtering:
+
+```bash
+# Get all tabs
+./scripts/get_tabs.sh                      # All tabs as TSV (default)
+./scripts/get_tabs.sh markdown             # All tabs as markdown links
+./scripts/get_tabs.sh json                 # All tabs as JSON
+
+# Filter by window number
+./scripts/get_tabs.sh -w 1 markdown        # Window 1 as markdown
+
+# Search for window by tab title
+./scripts/get_tabs.sh -m "Handbook" markdown  # Window containing "Handbook" tab
+```
 
 ## Export Formats
 

@@ -79,8 +79,7 @@ Once installed, simply ask Claude to help with Safari-related tasks. The skill w
 All scripts are in the `scripts/` directory and can be invoked by Claude or run manually:
 
 ### Tab Management
-- `get_tabs.sh` - Get all open tabs (raw output)
-- `get_tabs_tsv.sh` - Get tabs as TSV (window, tab, URL, title)
+- `get_tabs.sh` - Get tabs with optional window filtering (TSV/markdown/JSON)
 - `close_tabs.sh` - Close specific tabs by window/tab index
 - `close_by_pattern.sh` - Close tabs matching a URL pattern
 - `find_duplicates.sh` - Find and optionally close duplicate tabs
@@ -105,6 +104,14 @@ All scripts are in the `scripts/` directory and can be invoked by Claude or run 
 ## Manual Usage
 
 You can also use the scripts directly from the command line:
+
+### Get tabs
+```bash
+./scripts/get_tabs.sh                    # All tabs as TSV
+./scripts/get_tabs.sh markdown           # All tabs as markdown links
+./scripts/get_tabs.sh -w 1 markdown      # Window 1 as markdown
+./scripts/get_tabs.sh -m "Handbook" json # Find window with "Handbook" tab as JSON
+```
 
 ### Export tabs to markdown
 ```bash
