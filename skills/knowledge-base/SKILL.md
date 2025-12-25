@@ -1,6 +1,6 @@
 ---
 name: knowledge-base
-description: Manage your personal knowledge base of curated resources, bookmarks, and excerpts. Triggers include "knowledge base", "kb", "add to knowledge", "add tabs to", "what do I have on", "find resources about". Use with safari-tabs skill for bulk ingestion from Safari windows. Location is ~/knowledge/.
+description: Manage your personal knowledge base of curated resources, bookmarks, and excerpts. Triggers include "knowledge base", "kb", "add to knowledge", "add tabs to", "what do I have on", "what do we know about", "find resources about". Use with safari-tabs skill for bulk ingestion from Safari windows. Location is ~/knowledge/.
 ---
 
 # Knowledge Base
@@ -32,7 +32,7 @@ Concise summary integrating the main points and key takeaways. Keep it flowingâ€
 Additional context or explanation as needed.
 ```
 
-**Summary length**: Keep summaries proportional to source content. Short posts need short summariesâ€”extract the core insight, don't rehash everything.
+**Summary length**: Keep summaries to 1-2 short paragraphs, unless the source is exceptionally long, important and insightful. Extract the core insight, don't rehash everything.
 
 ### Tools (Software & Libraries)
 
@@ -112,6 +112,7 @@ Desktop applications, web services, and other software should also use the tools
 - When uncertain between topics, prefer the more specific one
 - If no topic fits well, add to `_inbox.md` with a suggested topic name
 - Offer to create new topics if multiple items cluster around a theme
+- **Large topics**: If a topic file becomes very large (>500 lines or >30 entries), ask the user to split it into more specific topics to avoid filling context unnecessarily
 
 **For tools and software:**
 - Route software/libraries/utilities to `tools/` by use case
@@ -244,6 +245,7 @@ This allows leveraging curated, previously-vetted software before searching the 
 
 - **Add tabs from window:** Ingest all tabs from a Safari window
 - **What do I have on X:** Search topics for relevant resources
-- **Find resources about X:** Same as above
+- **What do we know about X:** Search topics for relevant resources
+- **Find resources about X:** Search topics for relevant resources
 - **Find a tool/app for X:** Search tools/ first, then web search if needed
 - **Add this to knowledge base:** Add current URL or pasted content
