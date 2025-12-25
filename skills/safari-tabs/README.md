@@ -20,12 +20,17 @@ This skill enables Claude to interact with your Safari browser to:
 
 ## Installation
 
-See the [Installation Guide](../../docs/INSTALLATION.md) for detailed instructions.
-
-**Quick install:**
+### Via Symlink (Recommended)
 ```bash
-cp safari-tabs.skill ~/.claude/skills/
+ln -s /path/to/claude-skills/skills/safari-tabs ~/.claude/skills/safari-tabs
 ```
+
+### Via Copy
+```bash
+cp -r skills/safari-tabs ~/.claude/skills/
+```
+
+The skill will automatically be available in Claude Code after installation.
 
 ## Usage Examples
 
@@ -224,32 +229,3 @@ Grant automation permissions:
 chmod +x scripts/*.sh
 ```
 
-## Development
-
-The skill is structured as:
-```
-safari-tabs/
-├── SKILL.md           # Skill definition for Claude
-├── README.md          # This file
-└── scripts/           # Shell scripts
-    ├── get_tabs.sh
-    ├── export_*.sh
-    └── ...
-```
-
-To modify:
-1. Edit files in `skills/safari-tabs/`
-2. Rebuild: `cd skills/safari-tabs && zip -r ../../safari-tabs.skill .`
-3. Reinstall: `cp safari-tabs.skill ~/.claude/skills/`
-
-## Contributing
-
-Contributions welcome! Please:
-1. Test on macOS with Safari
-2. Ensure scripts are POSIX-compliant
-3. Update SKILL.md if adding new capabilities
-4. Include usage examples
-
-## License
-
-MIT License - see [LICENSE](../../LICENSE)
