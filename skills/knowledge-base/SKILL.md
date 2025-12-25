@@ -32,7 +32,7 @@ Concise summary integrating the main points and key takeaways. Keep it flowingâ€
 Additional context or explanation as needed.
 ```
 
-**Summary length**: Keep summaries to 1-2 short paragraphs, unless the source is exceptionally long, important and insightful. Extract the core insight, don't rehash everything.
+**Summary length**: Keep summaries to 1-2 short paragraphs, unless the source is exceptionally long, important and insightful. Focus on core insights. Be extremely concise. Sacrifice grammar for the sake of concision.
 
 ### Tools (Software & Libraries)
 
