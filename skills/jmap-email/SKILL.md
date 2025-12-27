@@ -59,6 +59,34 @@ node scripts/get-email.ts <email-id>
 3. (Optional) View full content: `get-email.ts <email-id>`
 4. Move to target mailbox: `move-by-ids.ts --mailbox @MailboxName id1 id2 id3`
 
+### Interactive email triage
+**Workflow for processing new emails with learning:**
+
+1. **Fetch recent emails:**
+   - Use `list-emails.ts --limit 20` to get batch (optionally add `--unread` or `--mailbox "Inbox"`)
+   - Review subject, sender, and preview
+
+2. **Present classification options:**
+   - Use AskUserQuestion with multiSelect for each email
+   - Options should be target mailboxes (Inbox, Archive, @Reference, etc.)
+   - Allow user to select destination for each email
+
+3. **Execute moves:**
+   - Group emails by target mailbox
+   - Use `move-by-ids.ts --mailbox <name> <id1> <id2> ...` for each group
+
+4. **Save routing patterns to memory:**
+   - Note sender domains and subjects that map to specific mailboxes
+   - Record user's classification decisions (e.g., "newsletters from X → Archive")
+   - Reference these patterns in future triage sessions
+   - Suggest automatic routing rules based on observed patterns
+
+**Benefits:**
+- Process inbox in batches with interactive guidance
+- Build up routing knowledge over time
+- Suggest classifications based on past decisions
+- Gradually automate common routing patterns
+
 ### View mailbox structure
 ```bash
 node scripts/list-mailboxes.ts
