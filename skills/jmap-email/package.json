@@ -1,0 +1,12 @@
+{
+  "name": "jmap-email-skill",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "JMAP email access utilities for Claude Code",
+  "dependencies": {
+    "jmap-jam": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  }
+}
