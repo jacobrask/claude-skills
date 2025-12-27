@@ -64,6 +64,30 @@ export function formatSize(bytes: number): string {
 }
 
 /**
+ * Strip HTML tags and decode entities to plain text
+ */
+function stripHtml(html: string): string {
+  return html
+    // Convert <br>, <p> to newlines for structure
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n\n')
+    .replace(/<p[^>]*>/gi, '')
+    // Strip all other HTML tags
+    .replace(/<[^>]+>/g, '')
+    // Decode HTML entities
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x([0-9A-F]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(Number(dec)))
+    // Clean up whitespace
+    .replace(/\n\s*\n\s*\n/g, '\n\n') // max 2 consecutive newlines
+    .trim();
+}
+
+/**
  * Print email in compact format (for lists)
  */
 export function printEmailCompact(email: Email): void {
@@ -122,20 +146,29 @@ export function printEmailDetailed(email: Email): void {
   }
 
   // Print body if available
-  if (email.textBody && email.textBody.length > 0 && email.bodyValues) {
+  // Prefer HTML body if text body is very short (likely truncated or stub)
+  const hasTextBody = email.textBody && email.textBody.length > 0 && email.bodyValues;
+  const hasHtmlBody = email.htmlBody && email.htmlBody.length > 0 && email.bodyValues;
+
+  let textBodyValue = null;
+  if (hasTextBody) {
     const partId = email.textBody[0].partId;
-    const bodyValue = email.bodyValues[partId];
-    if (bodyValue && bodyValue.value) {
-      console.log("\n--- Body ---\n");
-      console.log(bodyValue.value);
-    }
-  } else if (email.htmlBody && email.htmlBody.length > 0 && email.bodyValues) {
+    textBodyValue = email.bodyValues[partId];
+  }
+
+  const textBodyLength = textBodyValue?.value?.length || 0;
+  const useHtmlBody = hasHtmlBody && textBodyLength < 200;
+
+  if (useHtmlBody) {
     const partId = email.htmlBody[0].partId;
     const bodyValue = email.bodyValues[partId];
     if (bodyValue && bodyValue.value) {
-      console.log("\n--- HTML Body ---\n");
-      console.log(bodyValue.value);
+      console.log("\n--- Body ---\n");
+      console.log(stripHtml(bodyValue.value));
     }
+  } else if (textBodyValue && textBodyValue.value) {
+    console.log("\n--- Body ---\n");
+    console.log(textBodyValue.value);
   }
 }
 
